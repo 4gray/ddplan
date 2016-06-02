@@ -1,0 +1,52 @@
+table.md-table:not(.md-row-select) td.md-cell:first-child, table.md-table:not(.md-row-select) th.md-column:first-child {
+    padding: 0 10px !important;
+}
+
+table.md-table:not(.md-row-select) td.md-cell:nth-child(n+2):nth-last-child(n+2), table.md-table:not(.md-row-select) th.md-column:nth-child(n+2):nth-last-child(n+2) {
+    padding: 0 15px 0 0 !important;
+}
+
+table.md-table tbody.md-body>tr.md-row, table.md-table tfoot.md-foot>tr.md-row {
+    height: 40px !important;
+}
+
+table.md-table thead.md-head>tr.md-row {
+    height: 30px !important;
+    background: #E4E4E4;
+}
+
+md-autocomplete > md-autocomplete-wrap > md-progress-linear { display: none; }
+md-autocomplete > md-autocomplete-wrap > button { display: none; }
+
+html {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+body {
+  height: 100%;
+  padding: 0;
+  overflow: auto;
+  margin: 0;
+  -webkit-overflow-scrolling: touch;
+}
+
+.ng-hide {
+    display: none !important;
+}
+
+.md-subheader ._md-subheader-inner {
+    padding: 5px 16px;
+}
+
+:not(input):not(textarea),
+:not(input):not(textarea)::after,
+:not(input):not(textarea)::before {
+    -webkit-user-select: none;
+    user-select: none;
+    cursor: default;
+}
+input, button, textarea, :focus {
+    outline: none; // You should add some other style for :focus to help UX/a11y
+}
