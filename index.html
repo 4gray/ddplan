@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html ng-app="DDPlan">
+<html>
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<!-- Angular Material style sheet -->
-		<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc4/angular-material.min.css">
 		<title>DDPlan</title>
 		<link rel="stylesheet" href="style.css">
+
+		<!-- Angular Material style sheet -->
+		<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc4/angular-material.min.css">
 		<link rel="stylesheet" href="node_modules/angular-material-data-table/dist/md-data-table.min.css">
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
@@ -22,76 +23,42 @@
 		<script type="text/javascript" src="node_modules/angular-material-data-table/dist/md-data-table.min.js"></script>
 		<script src="http://cdn.jsdelivr.net/angular-material-icons/0.4.0/angular-material-icons.min.js"></script>
 
-		<script type="text/javascript" src="main.js"></script>
+		<script type="text/javascript" src="js/config.js"></script>
+		<script type="text/javascript" src="js/directives.js"></script>
+		<script type="text/javascript" src="js/main.js"></script>
+		<script type="text/javascript" src="js/planService.js"></script>
 	</head>
 
-	<body ng-controller="AppCtrl" layout="row" > <!-- style="background: #03A9F4"> -->
+	<body ng-app="DDPlan">
+		<div class="arrow-up"></div>
+		<div ng-controller="AppCtrl" layout="column">
 
-		<div layout="column" flex>
-			<md-toolbar layout="row" layout-align="center center">
-				<md-autocomplete
-					id="Stop"
-					flex="90"
-					placeholder="Haltestelle eingeben"
-					md-selected-item-change="getPlan(busStop)"
-					md-search-text="busStop"
-					ng-enter="getPlan(busStop)"
-					md-items="item in querySearch(busStop)"
-					md-no-cache="ctrl.noCache"
-					md-item-text="item">
-					<md-item-template>
-						<span md-highlight-flags="^i" md-highlight-text="busStop" flex>{{item}}</span>
-					</md-item-template>
-					<md-not-found>
-						No matches found for "{{busStop}}"
-					</md-not-found>
-				</md-autocomplete>
-			</md-toolbar>
+		<md-toolbar layout="row" layout-align="center center" style="position: fixed;overflow:hidden">
+			<md-autocomplete
+				id="Stop"
+				flex="90"
+				placeholder="Enter bus stop name"
+				md-selected-item-change="getPlan(busStop)"
+				md-search-text="busStop"
+				ng-enter="getPlan(busStop)"
+				md-items="item in querySearch(busStop)"
+				md-item-text="item"
+				style="margin-left: 10px;">
+				<md-item-template>
+					<span md-highlight-flags="^i" md-highlight-text="busStop" flex>{{item}}</span>
+				</md-item-template>
+				<md-not-found>
+					No matches found for "{{busStop}}"
+				</md-not-found>
+			</md-autocomplete>
+			<span flex=""></span>
+			<md-button ng-click="showSettings()" class="md-icon-button">
+				<i class="material-icons">settings</i>
+			</md-button>
 
-			<md-content layout="column">
-				<md-subheader>
-					<div style="float:left;line-height: 30px;">
-					{{selectedStop}}
-					</div>
-					<div style="float:right;">
-					<md-button class="md-icon-button md-primary" aria-label="Add" ng-click="getPlan(selectedStop)" style="width:35px;height: 35px;padding:0">
-					    <md-icon  style="font-size:20px;" md-font-set="material-icons">refresh</md-icon>
-					</md-button>
-					<!-- <md-button class="md-icon-button md-primary" aria-label="Add" ng-click="showSearchPanel = !showSearchPanel" style="width:35px;height: 35px;padding:0">
-					    <md-icon style="font-size:20px;" md-font-set="material-icons">search</md-icon>
-					</md-button> -->
-					</div>
-				</md-subheader>
+		</md-toolbar>
 
-
-				<div ng-show="isLoading" layout="row" layout-sm="column" layout-align="space-around">
-					<md-progress-circular md-mode="indeterminate"></md-progress-circular>
-				</div>
-
-				<md-table-container ng-show="!isLoading">
-				  <table md-table>
-				    <thead md-head>
-				      <tr md-row>
-				        <th md-column md-numeric><span>Linie</span></th>
-				        <th md-column><span>Richtung</span></th>
-				        <th md-column md-numeric>Minuten | Uhrzeit</th>
-				      </tr>
-				    </thead>
-				    <tbody md-body>
-				      <tr md-row md-select="dessert" md-select-id="name" md-auto-select ng-repeat="item in plan">
-				        <td md-cell>{{item[0]}}</td>
-				        <td md-cell>{{item[1]}}</td>
-				        <td md-cell>{{item[2]}} | {{addMinutes(item[2])}}</td>
-				      </tr>
-				    </tbody>
-				  </table>
-				  <div layout="row" layout-align="center center">
-				  	<md-button md-no-ink class="md-primary" ng-click="morePlan(selectedStop)">Später</md-button>
-				  </div>
-				</md-table-container>
-
-			</md-content>
+		<plan-list stop="selectedStop" plan="plan" get-plan="getPlan(selectedStop)" more-plan="morePlan(selectedStop)" style="position:relative;top:50px;width:100%;"></plan-list>
 		</div>
-
 	</body>
 </html>

@@ -1,5 +1,6 @@
 {
   "name": "DDPlan",
+  "productName": "DDPlan",
   "version": "0.1.0",
   "author": "4gray",
   "main": "app.js",
@@ -7,9 +8,10 @@
     "angular": "^1.5.5",
     "angular-animate": "^1.5.5",
     "angular-aria": "^1.5.5",
-    "angular-material": "1.0.6",
+    "angular-messages": "^1.5.5",
+    "angular-material": "1.1.0",
     "angular-material-data-table": "^0.10.7",
-    "menubar": "^4.1.0"
+    "menubar": "^5.1.0"
   },
   "keywords": [
     "electron",
