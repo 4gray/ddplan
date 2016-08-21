@@ -1,15 +1,14 @@
-<md-content layout="column" ng-if="stop">
+<div ng-if="stop">
 	<md-subheader>
-		<div style="float:left;line-height: 30px;">
+		<div class="selectedStop">
 			{{stop}}
 		</div>
 		<div style="float:right;">
-			<md-button class="md-icon-button md-primary" aria-label="Add" ng-click="getPlan({stop:stop})" style="width:35px;height: 35px;padding:0">
-			    <md-icon  style="font-size:20px;" md-font-set="material-icons">refresh</md-icon>
+			<md-button class="md-icon-button md-primary refresh-btn" aria-label="Add" ng-click="getPlan({stop:stop})">
+			    <md-icon style="font-size:20px;" md-font-set="material-icons">refresh</md-icon>
 			</md-button>
 		</div>
 	</md-subheader>
-
 
 	<div ng-show="isLoading" layout="row" layout-sm="column" layout-align="space-around">
 		<md-progress-circular md-mode="indeterminate"></md-progress-circular>
@@ -25,7 +24,7 @@
 	      </tr>
 	    </thead>
 	    <tbody md-body>
-	      <tr md-row md-select="dessert" md-select-id="name" md-auto-select ng-repeat="item in plan">
+	      <tr md-row md-select-id="name" md-auto-select ng-repeat="item in plan">
 	        <td md-cell>{{item[0]}}</td>
 	        <td md-cell>{{item[1]}}</td>
 	        <td md-cell>{{item[2]}} | {{addMinutes(item[2])}}</td>
@@ -37,11 +36,10 @@
 	  </div>
 	</md-table-container>
 
-</md-content>
-<md-content layout="column" ng-if="!stop">
-
-	<md-card style="margin-top:20px;">
-        <img src="splash.jpg" class="md-card-image" alt="Washed Out">
+</div>
+<div ng-if="!stop">
+	<md-card>
+        <img src="splash.jpg" class="md-card-image">
         <md-card-title>
           <md-card-title-text>
             <span class="md-headline">Welcome!</span>
@@ -52,10 +50,5 @@
           	This app helps you to get timetables for trams, trains and buses in Dresden. Please enter the name of bus stop in the field above.
           </p>
         </md-card-content>
-        <!-- <md-card-actions layout="row" layout-align="end center">
-          <md-button ng-click="openUrl('https://github.com/4gray/ddplan')">DDPlan on Github</a></md-button>
-        </md-card-actions> -->
       </md-card>
-
-
-</md-content>
+</div>

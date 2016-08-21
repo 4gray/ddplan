@@ -1,17 +1,26 @@
-html {
+html, body {
+  background: rgba(0, 0, 0, 0);
   height: 100%;
   width: 100%;
-  overflow: hidden;
-}
-
-body {
-  height: 100%;
   padding: 0;
-  overflow: auto;
   margin: 0;
   -webkit-overflow-scrolling: touch;
+  overflow: scroll;
+  overflow-x: hidden;
 }
 
+::-webkit-scrollbar {
+    width: 0px;  /* remove scrollbar space */
+    background: transparent;  /* optional: just make scrollbar invisible */
+}
+/* optional: show position indicator in red */
+::-webkit-scrollbar-thumb {
+    background: #FF0000;
+}
+
+md-table-container {
+  width: 100%;
+}
 
 table.md-table:not(.md-row-select) td.md-cell:first-child, table.md-table:not(.md-row-select) th.md-column:first-child {
     padding: 0 10px !important;
@@ -26,7 +35,7 @@ table.md-table tbody.md-body>tr.md-row, table.md-table tfoot.md-foot>tr.md-row {
 }
 
 table.md-table thead.md-head>tr.md-row {
-    height: 30px !important;
+    height: 26px !important;
     background: #E4E4E4;
 }
 
@@ -38,7 +47,8 @@ md-autocomplete > md-autocomplete-wrap > button { display: none; }
 }
 
 .md-subheader ._md-subheader-inner {
-    padding: 5px 16px;
+    padding: 0px 20px;
+    height: 20px;
 }
 
 :not(input):not(textarea),
@@ -54,5 +64,31 @@ input, button, textarea, :focus {
 }
 
 .md-subheader ._md-subheader-inner {
-  padding-top: 8px !important;
+  padding-top: 10px !important;
+}
+
+.full-heigth {
+    height: -moz-calc(100% - 64px);
+    height: -webkit-calc(100% - 64px);
+    height: calc(100% - 64px);
+}
+
+.arrow-up {
+  width: 0px;
+  height: 0px;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-bottom: 15px solid rgb(1,169,244);
+  margin-left: 125px;
+}
+
+.selectedStop {
+  float: left;
+  line-height: 30px;
+}
+
+.refresh-btn {
+  width: 30px !important;
+  height: 30px !important;
+  padding: 0 !important;
 }

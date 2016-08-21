@@ -29,36 +29,33 @@
 		<script type="text/javascript" src="js/planService.js"></script>
 	</head>
 
-	<body ng-app="DDPlan">
+	<body ng-app="DDPlan" ng-controller="AppCtrl">
 		<div class="arrow-up"></div>
-		<div ng-controller="AppCtrl" layout="column">
+		<md-toolbar style="height:50px !important; min-height:50px !important">
+			<div class="md-toolbar-tools" style="height:50px !important; min-height:49px !important">
+	            <md-autocomplete
+					id="Stop"
+					flex="95"
+					placeholder="Enter bus stop name"
+					md-selected-item-change="getPlan(busStop)"
+					md-search-text="busStop"
+					ng-enter="getPlan(busStop)"
+					md-items="item in querySearch(busStop)"
+					md-item-text="item">
+					<md-item-template>
+						<span md-highlight-flags="^i" md-highlight-text="busStop" flex>{{item}}</span>
+					</md-item-template>
+					<md-not-found>
+						No matches found for "{{busStop}}"
+					</md-not-found>
+				</md-autocomplete>
+	            <span flex=""></span>
+				<md-button ng-click="showSettings()" class="md-icon-button">
+					<i class="material-icons">settings</i>
+				</md-button>
+	        </div>
+    	</md-toolbar>
 
-		<md-toolbar layout="row" layout-align="center center" style="position: fixed;overflow:hidden">
-			<md-autocomplete
-				id="Stop"
-				flex="90"
-				placeholder="Enter bus stop name"
-				md-selected-item-change="getPlan(busStop)"
-				md-search-text="busStop"
-				ng-enter="getPlan(busStop)"
-				md-items="item in querySearch(busStop)"
-				md-item-text="item"
-				style="margin-left: 10px;">
-				<md-item-template>
-					<span md-highlight-flags="^i" md-highlight-text="busStop" flex>{{item}}</span>
-				</md-item-template>
-				<md-not-found>
-					No matches found for "{{busStop}}"
-				</md-not-found>
-			</md-autocomplete>
-			<span flex=""></span>
-			<md-button ng-click="showSettings()" class="md-icon-button">
-				<i class="material-icons">settings</i>
-			</md-button>
-
-		</md-toolbar>
-
-		<plan-list stop="selectedStop" plan="plan" get-plan="getPlan(selectedStop)" more-plan="morePlan(selectedStop)" style="position:relative;top:50px;width:100%;"></plan-list>
-		</div>
+		<md-content plan-list class="full-heigth" stop="selectedStop" plan="plan" get-plan="getPlan(selectedStop)" more-plan="morePlan(selectedStop)"></md-content>
 	</body>
 </html>

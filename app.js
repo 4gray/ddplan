@@ -16,8 +16,8 @@ app.on('window-all-closed', () => {
 	}
 });
 
-/*
 
+/*
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 app.on('ready', () => {
@@ -27,7 +27,9 @@ app.on('ready', () => {
 		height: 500,
 		resizable: false,
 		titleBarStyle: 'hidden',
-		frame:false
+		frame:false,
+		frame: false,
+		transparent:true
 	});
 
 	//and load the index.html of the app.
@@ -56,7 +58,9 @@ var mb = menubar({
 	width: 280,
 	height: 500,
 	resizable: false,
-	preloadWindow: true
+	preloadWindow: true,
+	frame: false,
+	transparent:true
 });
 
 mb.on('ready', function ready () {

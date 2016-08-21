@@ -14,7 +14,7 @@ app.directive('ngEnter', function () {
 
 app.directive('planList', function() {
 	return {
-		restricted: 'E',
+		restricted: 'A',
 		scope: {
 			stop: '=',
 			plan: '=',
