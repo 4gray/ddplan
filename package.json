@@ -1,27 +1,66 @@
 {
-  "name": "DDPlan",
-  "productName": "DDPlan",
-  "version": "0.1.0",
-  "author": "4gray",
-  "main": "app.js",
-  "dependencies": {
-    "angular": "^1.5.5",
-    "angular-animate": "^1.5.5",
-    "angular-aria": "^1.5.5",
-    "angular-messages": "^1.5.5",
-    "angular-material": "1.1.0",
-    "angular-material-data-table": "^0.10.7",
-    "menubar": "^5.1.0"
-  },
-  "keywords": [
-    "electron",
-    "angularjs",
-    "fahrplan",
-    "dresden",
-    "dvb"
-  ],
-  "scripts": {
-    "start": "electron app.js",
-    "pack:osx": "./node_modules/.bin/electron-packager . $npm_package_productName --app-version=$npm_package_version --version=0.36.7 --out=builds --ignore='^/builds$' --platform=darwin --arch=x64 --sign='Developer ID Application: My Company Ltd (ABCDEFGH10)' --icon=icon.icns --overwrite"
-  }
+    "name": "ddplan",
+    "version": "1.0.0",
+    "homepage": "./",
+    "main": "electron-main.js",
+    "scripts": {
+        "ng": "ng",
+        "start": "ng serve",
+        "build": "ng build",
+        "watch": "ng build --watch --configuration development",
+        "test": "ng test",
+        "start:ng": "ng serve",
+        "build:ng": "ng build --base-href ./",
+        "start:electron": "npm run build:ng && electron .",
+        "package:electron": "npm run build:ng && electron-builder",
+        "lint": "ng lint"
+    },
+    "private": true,
+    "dependencies": {
+        "@angular/animations": "^20.0.0",
+        "@angular/cdk": "^20.0.1",
+        "@angular/common": "^20.0.0",
+        "@angular/compiler": "^20.0.0",
+        "@angular/core": "^20.0.0",
+        "@angular/forms": "^20.0.0",
+        "@angular/material": "^20.0.1",
+        "@angular/platform-browser": "^20.0.0",
+        "menubar": "^9.5.1",
+        "rxjs": "~7.8.2",
+        "tslib": "^2.8.1"
+    },
+    "devDependencies": {
+        "@angular/build": "^20.0.0",
+        "@angular/cli": "^20.0.0",
+        "@angular/compiler-cli": "^20.0.0",
+        "angular-eslint": "19.6.0",
+        "electron": "^31.0.0",
+        "electron-builder": "^24.13.3",
+        "eslint": "^9.27.0",
+        "prettier": "^3.5.3",
+        "typescript": "~5.8.3",
+        "typescript-eslint": "8.33.0"
+    },
+    "build": {
+        "appId": "com.4gray.ddplan",
+        "productName": "DDPlan",
+        "directories": {
+            "output": "dist/electron"
+        },
+        "files": [
+            "dist/ddplan/browser/**",
+            "electron-main.js",
+            "package.json",
+            "IconTemplate.png"
+        ],
+        "mac": {
+            "icon": "IconTemplate.png"
+        },
+        "win": {
+            "icon": "IconTemplate.png"
+        },
+        "linux": {
+            "icon": "IconTemplate.png"
+        }
+    }
 }

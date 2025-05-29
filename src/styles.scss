@@ -1,0 +1,43 @@
+@use '@angular/material' as mat;
+
+@include mat.core();
+
+/* Global styles */
+html,
+body {
+    height: 100%;
+    margin: 0;
+    font-family: Roboto, 'Helvetica Neue', sans-serif;
+    // Transparent background for Electron app (from original style.css)
+    background: rgba(0, 0, 0, 0);
+    overflow: hidden; // Hide scrollbars (from original style.css)
+}
+
+// Hide scrollbars for WebKit browsers (Chrome, Safari, new Edge)
+::-webkit-scrollbar {
+    display: none;
+}
+
+// Hide scrollbars for Firefox
+html {
+    scrollbar-width: none; // For Firefox
+}
+
+// Hide scrollbars for IE/Edge (older versions)
+body {
+    -ms-overflow-style: none; // For IE and Edge
+}
+
+.full-height {
+    height: 100%;
+    // overflow-y: auto; // If content within needs scrolling
+}
+
+html,
+body {
+    height: 100%;
+}
+body {
+    margin: 0;
+    font-family: Roboto, 'Helvetica Neue', sans-serif;
+}

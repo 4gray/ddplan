@@ -1,0 +1,78 @@
+/* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+    height: 100%;
+}
+body {
+    margin: 0;
+    font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
+
+/* Dark theme styles */
+body.dark-theme {
+    background-color: #121212;
+    color: #ffffff;
+}
+
+body.dark-theme .mat-toolbar {
+    background-color: #1f1f1f !important;
+}
+
+body.dark-theme .mat-form-field {
+    color: #ffffff;
+}
+
+body.dark-theme .mat-form-field .mat-form-field-underline {
+    background-color: #ffffff;
+}
+
+body.dark-theme .mat-form-field-appearance-fill .mat-form-field-flex {
+    background-color: #2d2d2d;
+}
+
+body.dark-theme .mat-autocomplete-panel {
+    background-color: #2d2d2d;
+    color: #ffffff;
+}
+
+body.dark-theme .mat-option {
+    color: #ffffff;
+}
+
+body.dark-theme .mat-option:hover {
+    background-color: #404040;
+}
+
+body.dark-theme .mat-list-item {
+    color: #ffffff;
+}
+
+body.dark-theme .mat-card {
+    background-color: #1f1f1f;
+    color: #ffffff;
+}
+
+body.dark-theme .mat-divider {
+    border-top-color: #404040;
+}
+
+body.dark-theme .mat-progress-bar-fill::after {
+    background-color: #bb86fc;
+}
+
+body.dark-theme .mat-progress-bar-buffer {
+    background-color: #2d2d2d;
+}
+
+body.dark-theme .mat-dialog-container {
+    background-color: #1f1f1f;
+    color: #ffffff;
+}
+
+/* Custom fullscreen dialog */
+.fullscreen-dialog .mat-dialog-container {
+    padding: 0;
+    margin: 0;
+    border-radius: 0;
+}

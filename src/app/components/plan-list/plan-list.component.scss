@@ -1,0 +1,198 @@
+.welcome-container {
+    padding: 20px;
+}
+
+.plan-list-container {
+    box-sizing: border-box;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2px 12px;
+    background-color: #f5f5f5;
+    border-bottom: 1px solid #e0e0e0;
+
+    .location-info {
+        display: flex;
+        gap: 5px;
+        flex-direction: column;
+
+        .stop-name {
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin: 0;
+        }
+
+        .updated-time {
+            display: flex;
+            font-size: 0.8rem;
+            color: #757575;
+            margin: 0;
+
+            mat-icon {
+                font-size: 14px;
+                height: 14px;
+                width: 20px;
+            }
+        }
+    }
+}
+
+.loading-spinner-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    flex-grow: 1;
+}
+
+.arrivals-list {
+    overflow-y: auto;
+    flex-grow: 1;
+
+    .arrival-item {
+        display: flex;
+        padding: 2px 10px;
+        border-bottom: 1px solid #e0e0e0;
+        align-items: center;
+
+        .line-indicator {
+            background-color: #ef892a;
+            width: 32px;
+            height: 24px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            font-weight: 500;
+            margin-right: 10px;
+            flex-shrink: 0;
+        }
+
+        .arrival-details {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            .transport-type {
+                font-size: 0.8rem;
+                color: #757575;
+            }
+
+            .destination {
+                font-weight: 500;
+            }
+        }
+
+        .arrival-time {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            justify-content: center;
+
+            .time-minutes {
+                font-size: 1.1rem;
+                font-weight: 500;
+            }
+
+            .delay {
+                font-size: 0.8rem;
+
+                &.delay-late {
+                    color: #d32f2f;
+                }
+
+                &.delay-early {
+                    color: #2e7d32;
+                }
+            }
+
+            .clock-time {
+                font-size: 0.7rem;
+                color: #757575;
+            }
+        }
+    }
+}
+
+.no-data-message {
+    text-align: center;
+    padding: 20px;
+    color: grey;
+    flex-grow: 1;
+}
+
+.actions-footer {
+    padding: 8px 0;
+    text-align: center;
+    margin-top: 8px;
+}
+
+.departure-time {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+
+    .arrival-time {
+        font-size: 18px;
+    }
+
+    .arrival-minutes {
+        font-size: 14px;
+        color: grey;
+    }
+}
+
+/* Dark theme styles */
+:host-context(.dark-theme) .header-container {
+    background-color: #2d2d2d;
+    border-bottom-color: #404040;
+
+    .location-info {
+        .stop-name {
+            color: #ffffff;
+        }
+
+        .updated-time {
+            color: #bdbdbd;
+        }
+    }
+}
+
+:host-context(.dark-theme) .arrivals-list {
+    .arrival-item {
+        border-bottom-color: #404040;
+
+        .arrival-details {
+            .transport-type {
+                color: #bdbdbd;
+            }
+
+            .destination {
+                color: #ffffff;
+            }
+        }
+
+        .arrival-time {
+            .time-minutes {
+                color: #ffffff;
+            }
+
+            .clock-time {
+                color: #bdbdbd;
+            }
+        }
+    }
+}
+
+:host-context(.dark-theme) .no-data-message {
+    color: #bdbdbd;
+}

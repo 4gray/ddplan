@@ -1,0 +1,99 @@
+@if (!stop) {
+    <div class="welcome-container">
+        <mat-card class="welcome-card">
+            <mat-card-header>
+                <mat-card-title>DDPlan</mat-card-title>
+                <mat-card-subtitle
+                    >Abfahrtsmonitor für Dresden</mat-card-subtitle
+                >
+            </mat-card-header>
+            <img
+                mat-card-image
+                src="assets/images/splash.jpg"
+                alt="Dresden Elbe View"
+            />
+            <mat-card-content>
+                <p>
+                    Wähle eine Haltestelle aus, um die nächsten Abfahrten
+                    anzuzeigen.
+                </p>
+            </mat-card-content>
+        </mat-card>
+    </div>
+} @else {
+    <div class="plan-list-container">
+        <div class="header-container">
+            <div class="location-info">
+                <!-- <h3 class="stop-name">{{ stop }}</h3> -->
+                <p class="updated-time">
+                    <mat-icon>access_time</mat-icon>
+                    Updated
+                    {{ lastUpdated || '00:00:00' }}
+                </p>
+            </div>
+            <button mat-icon-button (click)="onRefresh()">
+                <mat-icon>refresh</mat-icon>
+            </button>
+        </div>
+
+        @if (isLoading) {
+            <div class="loading-spinner-container">
+                <mat-progress-spinner
+                    mode="indeterminate"
+                    diameter="50"
+                ></mat-progress-spinner>
+            </div>
+        }
+        @if (!isLoading && planData().length > 0) {
+            <div class="arrivals-list">
+                @for (item of planData(); track item) {
+                    <div class="arrival-item">
+                        <div class="line-indicator">
+                            {{ item.line }}
+                        </div>
+                        <div class="arrival-details">
+                            <div class="transport-type">
+                                {{ item.transportType }}
+                            </div>
+                            <div class="destination">{{ item.direction }}</div>
+                        </div>
+                        <div class="arrival-time">
+                            <div class="time-minutes">
+                                {{ item.arrivalTime }} min
+                            </div>
+                            @if (item.delay !== undefined) {
+                                <div
+                                    class="delay"
+                                    [class]="getDelayClass(item.delay)"
+                                >
+                                    {{ getDelayText(item.delay) }}
+                                </div>
+                            }
+                            <div class="clock-time">
+                                {{ addMinutes(item.arrivalTime) }}
+                            </div>
+                        </div>
+                    </div>
+                }
+                @if (!isLoading && stop) {
+                    <div class="actions-footer">
+                        <button
+                            mat-flat-button
+                            color="primary"
+                            (click)="onMorePlan()"
+                        >
+                            <mat-icon>update</mat-icon> Spätere Abfahrten
+                            anzeigen
+                        </button>
+                    </div>
+                }
+            </div>
+        }
+        @if (!isLoading && planData().length === 0 && stop) {
+            <div class="no-data-message">
+                Keine Abfahrtsinformationen für die gewählte Haltestelle
+                verfügbar.
+            </div>
+        }
+    </div>
+}
