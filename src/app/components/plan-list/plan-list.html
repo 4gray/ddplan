@@ -1,0 +1,84 @@
+<!-- @if (planResource.isLoading()) {
+    <mat-progress-bar mode="indeterminate" color="accent" />
+} -->
+<div class="plan-list-container">
+    @if (selectedStop()) {
+        <div class="header-container">
+            <div class="updated-info">
+                <mat-icon>access_time</mat-icon>
+                <span
+                    >Zuletzt aktualisiert:
+                    {{ lastUpdated() | date: 'HH:mm' }}</span
+                >
+            </div>
+            <div class="header-actions">
+                <button
+                    mat-icon-button
+                    class="favorite-btn"
+                    (click)="toggleFavorite()"
+                    [attr.aria-label]="
+                        isCurrentStopFavorite()
+                            ? 'Remove from favorites'
+                            : 'Add to favorites'
+                    "
+                    disableRipple
+                >
+                    <mat-icon>{{
+                        isCurrentStopFavorite() ? 'star' : 'star_border'
+                    }}</mat-icon>
+                </button>
+                <button
+                    mat-icon-button
+                    class="refresh-btn"
+                    (click)="onRefresh()"
+                    disableRipple
+                >
+                    <mat-icon>refresh</mat-icon>
+                </button>
+            </div>
+        </div>
+    }
+
+    <div class="arrivals-list">
+        @for (item of planResource.value(); track item) {
+            <div class="arrival-row">
+                <div class="line-badge">{{ item.line }}</div>
+                <div class="destination">{{ item.direction }}</div>
+                <div class="timing">
+                    <span class="minutes"
+                        >{{ item.arrivalTimeRelative }} min</span
+                    >
+                    <span class="clock"
+                        >{{ item.arrivalTime | date: 'HH:mm' }}
+                        @if (item.delayTime) {
+                            <span
+                                class="delay"
+                                [class]="getDelayClass(item.delayTime)"
+                            >
+                                {{ getDelayText(item.delayTime) }}
+                            </span>
+                        }
+                    </span>
+                </div>
+            </div>
+        } @empty {
+            <div class="no-data">
+                <mat-icon>location_on</mat-icon>
+                <p>Keine Haltestelle ausgewählt</p>
+                <p class="hint">
+                    Suche nach einer Haltestelle oder wähle eine aus deinen
+                    Favoriten.
+                </p>
+            </div>
+        }
+
+        @if (planResource.value()?.length && !planResource.isLoading()) {
+            <div class="load-more">
+                <button mat-button class="load-more-btn" (click)="onMorePlan()">
+                    <mat-icon>expand_more</mat-icon>
+                    Mehr Abfahrten
+                </button>
+            </div>
+        }
+    </div>
+</div>

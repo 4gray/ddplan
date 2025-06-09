@@ -1,0 +1,50 @@
+<nav class="sidebar">
+    <div class="sidebar-nav">
+        <button
+            mat-icon-button
+            disableRipple
+            class="sidebar-icon"
+            [class.active]="currentMode() === AppMode.ARRIVALS"
+            (click)="onArrivalsClick()"
+            matTooltip="Live Arrivals"
+            matTooltipPosition="right"
+        >
+            <mat-icon>schedule</mat-icon>
+        </button>
+        <button
+            mat-icon-button
+            disableRipple
+            class="sidebar-icon"
+            [class.active]="currentMode() === AppMode.FAVORITES"
+            (click)="onFavoritesClick()"
+            matTooltip="Favorite Stops"
+            matTooltipPosition="right"
+        >
+            <mat-icon>star</mat-icon>
+        </button>
+    </div>
+
+    <div class="sidebar-bottom">
+        <button
+            mat-icon-button
+            disableRipple
+            class="sidebar-icon"
+            [class.active]="currentMode() === AppMode.SETTINGS"
+            (click)="onSettingsClick()"
+            matTooltip="Settings"
+            matTooltipPosition="right"
+        >
+            <mat-icon>settings</mat-icon>
+        </button>
+        <button
+            mat-icon-button
+            disableRipple
+            class="sidebar-icon exit-icon"
+            (click)="onExitClick()"
+            matTooltip="Exit App"
+            matTooltipPosition="right"
+        >
+            <mat-icon>power_settings_new</mat-icon>
+        </button>
+    </div>
+</nav>

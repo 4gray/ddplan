@@ -1,0 +1,39 @@
+<mat-form-field appearance="fill" subscriptSizing="dynamic">
+    <input
+        class="stop-autocomplete"
+        matInput
+        placeholder="Haltestelle eingeben"
+        aria-label="Bus stop"
+        [matAutocomplete]="auto"
+        [value]="searchString()"
+        (input)="onSearchInput($event)"
+    />
+    <mat-autocomplete
+        #auto="matAutocomplete"
+        (optionSelected)="onStopSelected($event.option.value)"
+        [displayWith]="displayFn"
+    >
+        @for (item of searchResults.value(); track item.id) {
+            <mat-option [value]="item">
+                <mat-icon>location_on</mat-icon><span>{{ item.name }}</span>
+            </mat-option>
+        }
+        @if (searchString() !== '' && searchResults.value()?.length === 0) {
+            <mat-option [disabled]="true">
+                Keine Ergebnisse für "{{ searchString() }}"
+            </mat-option>
+        }
+    </mat-autocomplete>
+    @if (searchString()) {
+        <button
+            mat-icon-button
+            matSuffix
+            aria-label="Löschen"
+            (click)="onClear()"
+        >
+            <mat-icon>close</mat-icon>
+        </button>
+    } @else {
+        <mat-icon matSuffix>search</mat-icon>
+    }
+</mat-form-field>

@@ -1,0 +1,7 @@
+@if (currentMode() === AppMode.FAVORITES) {
+<div class="page-title">Favoriten</div>
+} @else if (currentMode() === AppMode.SETTINGS) {
+<div class="page-title">Einstellungen</div>
+} @else {
+<app-search-field />
+}

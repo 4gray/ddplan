@@ -1,0 +1,111 @@
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 44px;
+    height: 100%;
+    background-color: var(--mat-sys-surface-container);
+    border-right: 1px solid var(--mat-sys-outline-variant);
+    padding: 6px 0;
+    box-sizing: border-box;
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.sidebar-bottom {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.sidebar-icon {
+    width: 32px;
+    height: 32px;
+    margin: 0 auto;
+    color: var(--mat-sys-on-surface-variant);
+    transition: all 0.2s ease;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 !important;
+    min-width: 32px !important;
+    min-height: 32px !important;
+
+    &.active {
+        background-color: var(--mat-sys-primary-container);
+        color: var(--mat-sys-primary);
+    }
+
+    &:hover:not(.active) {
+        background-color: var(--mat-sys-surface-container-highest);
+        color: var(--mat-sys-on-surface);
+    }
+
+    &.exit-icon:hover {
+        background-color: var(--mat-sys-error-container);
+        color: var(--mat-sys-on-error-container);
+    }
+
+    mat-icon {
+        font-size: 18px;
+        width: 18px;
+        height: 18px;
+    }
+
+    // Disable Material Design ripple and hover effects
+    &.mat-mdc-icon-button {
+        --mdc-icon-button-state-layer-color: transparent !important;
+        --mdc-icon-button-hover-state-layer-opacity: 0 !important;
+        --mdc-icon-button-focus-state-layer-opacity: 0 !important;
+        --mdc-icon-button-pressed-state-layer-opacity: 0 !important;
+        --mat-mdc-button-persistent-ripple-color: transparent !important;
+        --mat-mdc-button-ripple-color: transparent !important;
+
+        // Remove all ripple and state layer elements
+        .mat-mdc-button-persistent-ripple,
+        .mat-mdc-button-ripple,
+        .mat-ripple,
+        .mdc-button__ripple,
+        .mat-mdc-button-touch-target,
+        .mdc-icon-button__state-layer {
+            display: none !important;
+            opacity: 0 !important;
+            pointer-events: none !important;
+            background: none !important;
+        }
+
+        // Remove pseudo-elements used for hover effects
+        &::before,
+        &::after {
+            display: none !important;
+            content: none !important;
+            background: none !important;
+        }
+
+        // Override any hover states from Material
+        &:hover,
+        &:focus,
+        &:active {
+            .mat-mdc-button-persistent-ripple,
+            .mat-mdc-button-ripple,
+            .mat-ripple,
+            .mdc-button__ripple,
+            .mdc-icon-button__state-layer {
+                display: none !important;
+                opacity: 0 !important;
+                background: none !important;
+            }
+
+            &::before,
+            &::after {
+                display: none !important;
+                background: none !important;
+            }
+        }
+    }
+}

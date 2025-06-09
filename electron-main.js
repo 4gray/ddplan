@@ -1,12 +1,29 @@
-const { app, ipcMain } = require('electron');
+const { app, ipcMain, nativeImage } = require('electron');
 const { menubar } = require('menubar');
 const path = require('path');
 
 const iconPath = path.join(__dirname, 'IconTemplate.png');
+const trayIcon = nativeImage.createFromPath(iconPath);
+
+// Set different icon sizes based on platform
+let resizedIcon;
+if (process.platform === 'darwin') {
+    resizedIcon = trayIcon.resize({ width: 20, height: 20 });
+    resizedIcon.setTemplateImage(true);
+} else if (process.platform === 'win32') {
+    resizedIcon = trayIcon.resize({ width: 16, height: 16 });
+} else {
+    resizedIcon = trayIcon.resize({ width: 22, height: 22 });
+}
+
+const isDev = process.env.NODE_ENV === 'development';
+const indexURL = isDev
+    ? 'http://localhost:4200'
+    : `file://${__dirname}/dist/ddplan/browser/index.html`;
 
 const mb = menubar({
-    index: `file://${__dirname}/dist/ddplan/browser/index.html`,
-    icon: iconPath,
+    index: indexURL,
+    icon: resizedIcon,
     browserWindow: {
         width: 300,
         height: 500,
@@ -15,10 +32,11 @@ const mb = menubar({
             contextIsolation: true,
             nodeIntegration: false,
             backgroundThrottling: false,
+            devTools: isDev,
         },
         transparent: true,
         fullscreenable: false,
-        alwaysOnTop: false,
+        alwaysOnTop: true,
         showOnAllWorkspaces: true,
     },
     tooltip: 'DDPlan',
@@ -27,15 +45,22 @@ const mb = menubar({
 });
 
 mb.on('ready', () => {
-    console.log('Menubar app is ready.');
-    // For development, you might want to point to ng serve
-    // if (process.env.NODE_ENV === 'development') {
-    //   mb.window.loadURL('http://localhost:4200');
-    // }
+    console.log('DDPlan is ready!');
+
+    if (isDev) {
+        console.log(
+            'Running in development mode, loading from Angular dev server'
+        );
+    } else {
+        console.log('Running in production mode, loading from built files');
+    }
 });
 
 mb.on('after-create-window', () => {
-    mb.window.openDevTools({ mode: 'undocked' }); // Uncomment to open DevTools
+    if (isDev) {
+        // Open dev tools in development mode
+        mb.window.webContents.openDevTools({ mode: 'detach' });
+    }
 });
 
 ipcMain.on('quit', () => {

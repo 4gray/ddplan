@@ -1,0 +1,31 @@
+<div class="welcome-screen">
+    <div class="welcome-content">
+        <div class="app-logo">
+            <img
+                src="./assets/images/splash.jpg"
+                alt="DDPlan Logo"
+                class="logo-image"
+            />
+        </div>
+
+        <div class="welcome-text">
+            <h2>Willkommen bei DDPlan!</h2>
+            <p>
+                Hi! Nutze die Suche, um deine Haltestelle zu finden und das
+                Stern-Symbol, um sie zu favorisieren.
+            </p>
+        </div>
+
+        <div class="welcome-actions">
+            <button
+                mat-raised-button
+                color="primary"
+                (click)="onDismiss()"
+                class="welcome-button"
+            >
+                <mat-icon>rocket_launch</mat-icon>
+                Los geht's!
+            </button>
+        </div>
+    </div>
+</div>

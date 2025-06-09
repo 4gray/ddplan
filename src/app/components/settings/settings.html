@@ -1,0 +1,50 @@
+<div class="settings-content">
+    <div class="settings-list">
+        <div class="setting-item">
+            <div class="setting-row">
+                <span class="setting-label">Dark Mode</span>
+                <mat-slide-toggle
+                    [checked]="isDarkMode"
+                    (change)="onDarkModeToggle($event.checked)"
+                    color="primary"
+                />
+            </div>
+        </div>
+
+        <div class="setting-item">
+            <div class="setting-row">
+                <span class="setting-label">Auto Refresh</span>
+                <mat-slide-toggle
+                    [checked]="autoRefresh"
+                    (change)="onAutoRefreshToggle($event.checked)"
+                    color="primary"
+                />
+            </div>
+        </div>
+
+        <div class="setting-item">
+            <div class="setting-row">
+                <span class="setting-label">Refresh Interval</span>
+                <div class="interval-controls">
+                    <button
+                        mat-icon-button
+                        class="interval-btn"
+                        (click)="decreaseInterval()"
+                        [disabled]="refreshInterval <= 15"
+                    >
+                        <mat-icon>remove</mat-icon>
+                    </button>
+                    <span class="interval-value">{{ refreshInterval }}s</span>
+                    <button
+                        mat-icon-button
+                        class="interval-btn"
+                        (click)="increaseInterval()"
+                        [disabled]="refreshInterval >= 120"
+                    >
+                        <mat-icon>add</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

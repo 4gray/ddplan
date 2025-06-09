@@ -1,0 +1,23 @@
+@if (isFirstStart) {
+<app-welcome-screen (dismissed)="onWelcomeDismissed()" />
+} @else {
+<div class="app-container">
+    <app-header [busStop]="selectedStopName()" [currentMode]="appMode" />
+
+    <app-sidebar
+        [currentMode]="appMode"
+        (modeChanged)="onModeChanged($event)"
+        (exitClicked)="closeApp()"
+    />
+
+    <main class="app-content">
+        @if (appMode === AppMode.ARRIVALS) {
+        <app-plan-list [stop]="selectedStopName()" />
+        } @else if (appMode === AppMode.FAVORITES) {
+        <app-favorites (stopSelected)="onFavoriteSelected($event)" />
+        } @else if (appMode === AppMode.SETTINGS) {
+        <app-settings />
+        }
+    </main>
+</div>
+}

@@ -1,3 +1,6 @@
 node_modules
 .angular
 dist
+.DS_Store
+.vscode
+.idea

@@ -2,35 +2,19 @@
 
 @include mat.core();
 
-/* Global styles */
-html,
-body {
-    height: 100%;
-    margin: 0;
-    font-family: Roboto, 'Helvetica Neue', sans-serif;
-    // Transparent background for Electron app (from original style.css)
-    background: rgba(0, 0, 0, 0);
-    overflow: hidden; // Hide scrollbars (from original style.css)
-}
-
-// Hide scrollbars for WebKit browsers (Chrome, Safari, new Edge)
-::-webkit-scrollbar {
-    display: none;
-}
-
-// Hide scrollbars for Firefox
 html {
-    scrollbar-width: none; // For Firefox
+    color-scheme: light;
+    @include mat.theme(
+        (
+            color: mat.$violet-palette,
+            typography: Roboto,
+            density: -1,
+        )
+    );
 }
 
-// Hide scrollbars for IE/Edge (older versions)
-body {
-    -ms-overflow-style: none; // For IE and Edge
-}
-
-.full-height {
-    height: 100%;
-    // overflow-y: auto; // If content within needs scrolling
+body.dark-theme {
+    color-scheme: dark;
 }
 
 html,
@@ -40,4 +24,23 @@ body {
 body {
     margin: 0;
     font-family: Roboto, 'Helvetica Neue', sans-serif;
+    height: calc(100vh - 24px);
+}
+
+.app-arrow {
+    position: relative;
+    padding: 12px 0;
+}
+
+.app-arrow:before {
+    content: '';
+    height: 0;
+    width: 0;
+    border-width: 0 8px 12px 8px;
+    border-style: solid;
+    border-color: transparent transparent var(--mat-sys-surface) transparent;
+    position: absolute;
+    top: 0px;
+    left: 50%;
+    transform: translateX(-50%);
 }
