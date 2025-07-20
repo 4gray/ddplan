@@ -6,6 +6,7 @@
         "name": "4gray",
         "email": "4gray@users.noreply.github.com"
     },
+    "license": "MIT",
     "homepage": "./",
     "main": "electron-main.js",
     "scripts": {
