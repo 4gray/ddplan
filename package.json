@@ -1,6 +1,11 @@
 {
     "name": "ddplan",
     "version": "1.0.0",
+    "description": "A modern menubar application for Dresden public transport timetables",
+    "author": {
+        "name": "4gray",
+        "email": "4gray@users.noreply.github.com"
+    },
     "homepage": "./",
     "main": "electron-main.js",
     "scripts": {
