@@ -13,3 +13,9 @@ mat-autocomplete {
 .mat-mdc-option {
     min-height: 48px;
 }
+
+::ng-deep {
+    .mat-mdc-text-field-wrapper.mdc-text-field.mdc-text-field--filled.mdc-text-field--no-label {
+        border-top-left-radius: 0 !important;
+    }
+}
