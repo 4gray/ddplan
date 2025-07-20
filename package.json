@@ -68,7 +68,27 @@
             "icon": "IconTemplate.png"
         },
         "linux": {
-            "icon": "IconTemplate.png"
+            "icon": "IconTemplate.png",
+            "target": [
+                {
+                    "target": "AppImage",
+                    "arch": [
+                        "x64"
+                    ]
+                },
+                {
+                    "target": "deb",
+                    "arch": [
+                        "x64"
+                    ]
+                },
+                {
+                    "target": "rpm",
+                    "arch": [
+                        "x64"
+                    ]
+                }
+            ]
         }
     }
 }

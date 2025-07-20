@@ -72,7 +72,6 @@ jobs:
                       dist/electron/*.AppImage
                       dist/electron/*.deb
                       dist/electron/*.rpm
-                      dist/electron/*.tar.gz
                   retention-days: 30
 
             - name: Upload artifacts (Windows)
