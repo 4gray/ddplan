@@ -16,6 +16,20 @@
 - 🔍 Smart stop search with autocomplete
 - 📱 Clean, modern interface
 
+## Download
+
+Ready to use DDPlan? Download the latest version for your platform:
+
+**[📥 Download Latest Release](https://github.com/4gray/ddplan/releases/latest)**
+
+Available for:
+
+- 🍎 **macOS** - `.dmg` installer
+- 🐧 **Linux** - `.AppImage`, `.deb`, `.rpm` packages
+- 🪟 **Windows** - `.exe` installer
+
+> **Note**: The app is not code-signed, so you may need to allow it in your system's security settings when running for the first time.
+
 ## Prerequisites
 
 - Node.js (version 18 or higher recommended)
