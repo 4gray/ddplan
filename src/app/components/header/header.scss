@@ -1,0 +1,18 @@
+:host {
+    border-radius: 10px 10px 0 0;
+    display: flex;
+    align-items: center;
+}
+
+.page-title {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #1f2937;
+    padding: 10px;
+}
+
+:host-context(.dark-theme) {
+    .page-title {
+        color: #f9fafb;
+    }
+}

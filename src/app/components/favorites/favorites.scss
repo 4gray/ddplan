@@ -1,0 +1,173 @@
+.favorites-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background: transparent;
+}
+
+.favorites-list {
+    flex: 1;
+    overflow-y: auto;
+    background: transparent;
+
+    .no-favorites {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 200px;
+        text-align: center;
+        color: #6b7280;
+        padding: 24px;
+
+        mat-icon {
+            font-size: 48px;
+            width: 48px;
+            height: 48px;
+            margin-bottom: 16px;
+            color: #d1d5db;
+        }
+
+        p {
+            margin: 4px 0;
+            font-size: 0.875rem;
+
+            &.hint {
+                font-size: 0.75rem;
+                color: #9ca3af;
+            }
+        }
+    }
+
+    .favorite-item {
+        display: flex;
+        align-items: center;
+        padding: 8px 12px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+        min-height: 44px;
+        transition: background-color 0.15s ease;
+        cursor: pointer;
+
+        &:hover {
+            background-color: rgba(0, 0, 0, 0.03);
+        }
+
+        &:last-child {
+            border-bottom: none;
+        }
+
+        .favorite-details {
+            flex: 1;
+            margin-right: 8px;
+
+            .favorite-name {
+                font-size: 0.875rem;
+                font-weight: 500;
+                color: #1f2937;
+                line-height: 1.2;
+                margin-bottom: 2px;
+            }
+
+            .favorite-city {
+                font-size: 0.75rem;
+                color: #6b7280;
+                line-height: 1;
+            }
+        }
+
+        .remove-btn {
+            width: 24px;
+            height: 24px;
+            line-height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 !important;
+            min-width: 24px !important;
+            min-height: 24px !important;
+            border-radius: 8px;
+            transition: background-color 0.15s ease;
+            opacity: 0.6;
+
+            &:hover {
+                background-color: rgba(239, 68, 68, 0.1);
+                opacity: 1;
+
+                mat-icon {
+                    color: #ef4444;
+                }
+            }
+
+            mat-icon {
+                font-size: 14px;
+                width: 14px;
+                height: 14px;
+                color: #6b7280;
+                transition: color 0.15s ease;
+            }
+
+            // Disable Material button effects
+            &::before {
+                display: none !important;
+            }
+
+            .mat-button-ripple,
+            .mat-ripple {
+                display: none !important;
+            }
+
+            .mat-button-focus-overlay {
+                display: none !important;
+            }
+        }
+    }
+}
+
+// Dark mode support
+:host-context(.dark-theme) {
+    .favorites-list {
+        .no-favorites {
+            color: #9ca3af;
+
+            mat-icon {
+                color: #4b5563;
+            }
+
+            p.hint {
+                color: #6b7280;
+            }
+        }
+
+        .favorite-item {
+            border-bottom-color: rgba(255, 255, 255, 0.06);
+
+            &:hover {
+                background-color: rgba(255, 255, 255, 0.03);
+            }
+
+            .favorite-details {
+                .favorite-name {
+                    color: #f9fafb;
+                }
+
+                .favorite-city {
+                    color: #9ca3af;
+                }
+            }
+
+            .remove-btn {
+                &:hover {
+                    background-color: rgba(239, 68, 68, 0.15);
+
+                    mat-icon {
+                        color: #f87171;
+                    }
+                }
+
+                mat-icon {
+                    color: #9ca3af;
+                }
+            }
+        }
+    }
+}

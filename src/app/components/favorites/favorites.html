@@ -1,0 +1,31 @@
+<div class="favorites-container">
+    <div class="favorites-list">
+        @if (favorites().length === 0) {
+            <div class="no-favorites">
+                <mat-icon>star_border</mat-icon>
+                <p>Keine Favoriten</p>
+                <p class="hint">
+                    Füge Haltestellen zu deinen Favoriten hinzu, um sie hier
+                    anzuzeigen.
+                </p>
+            </div>
+        } @else {
+            @for (favorite of favorites(); track favorite.name) {
+                <div class="favorite-item" (click)="selectStop(favorite)">
+                    <div class="favorite-details">
+                        <div class="favorite-name">{{ favorite.name }}</div>
+                        <div class="favorite-city">{{ favorite.city }}</div>
+                    </div>
+                    <button
+                        mat-icon-button
+                        class="remove-btn"
+                        (click)="removeFavorite($event, favorite.name)"
+                        disableRipple
+                    >
+                        <mat-icon>close</mat-icon>
+                    </button>
+                </div>
+            }
+        }
+    </div>
+</div>

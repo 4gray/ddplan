@@ -1,0 +1,21 @@
+:host {
+    width: 100%;
+}
+
+mat-form-field {
+    width: 100%;
+}
+
+mat-autocomplete {
+    max-height: 200px;
+}
+
+.mat-mdc-option {
+    min-height: 48px;
+}
+
+::ng-deep {
+    .mat-mdc-text-field-wrapper.mdc-text-field.mdc-text-field--filled.mdc-text-field--no-label {
+        border-top-left-radius: 0 !important;
+    }
+}

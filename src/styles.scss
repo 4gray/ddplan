@@ -1,0 +1,46 @@
+@use '@angular/material' as mat;
+
+@include mat.core();
+
+html {
+    color-scheme: light;
+    @include mat.theme(
+        (
+            color: mat.$violet-palette,
+            typography: Roboto,
+            density: -1,
+        )
+    );
+}
+
+body.dark-theme {
+    color-scheme: dark;
+}
+
+html,
+body {
+    height: 100%;
+}
+body {
+    margin: 0;
+    font-family: Roboto, 'Helvetica Neue', sans-serif;
+    height: calc(100vh - 24px);
+}
+
+.app-arrow {
+    position: relative;
+    padding: 12px 0;
+}
+
+.app-arrow:before {
+    content: '';
+    height: 0;
+    width: 0;
+    border-width: 0 8px 12px 8px;
+    border-style: solid;
+    border-color: transparent transparent var(--mat-sys-surface) transparent;
+    position: absolute;
+    top: 0px;
+    left: 50%;
+    transform: translateX(-50%);
+}

@@ -1,0 +1,49 @@
+:host {
+    height: calc(100vh - 12px);
+    display: block;
+    border-radius: 10px 10px 0 0;
+    background: var(--mat-sys-surface);
+    color: var(--mat-sys-on-surface);
+}
+
+.app-container {
+    border-radius: 10px 10px 0 0;
+    display: grid;
+    grid-template-columns: 44px 1fr;
+    grid-template-rows: auto auto 1fr;
+    grid-template-areas:
+        'sidebar header'
+        'sidebar progress'
+        'sidebar content';
+    height: calc(100vh - 12px);
+    overflow: hidden;
+}
+
+app-header {
+    grid-area: header;
+}
+
+app-sidebar {
+    grid-area: sidebar;
+}
+
+mat-progress-bar {
+    grid-area: progress;
+}
+
+.app-content {
+    grid-area: content;
+    overflow-y: auto;
+    background: var(--mat-sys-surface);
+    color: var(--mat-sys-on-surface);
+}
+
+.plan-container {
+    padding: 1rem;
+}
+
+.no-plan-message {
+    padding: 1rem;
+    text-align: center;
+    color: var(--mat-sys-on-surface-variant);
+}

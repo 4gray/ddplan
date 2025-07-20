@@ -1,0 +1,74 @@
+.settings-content {
+    padding: 8px 12px;
+    height: calc(100vh - 70px);
+    overflow: hidden;
+}
+
+.settings-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.setting-item {
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+
+    &:last-child {
+        border-bottom: none;
+    }
+}
+
+.setting-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 32px;
+}
+
+.setting-label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text-primary, #333);
+    line-height: 1.2;
+}
+
+.interval-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.interval-btn {
+    width: 28px !important;
+    height: 28px !important;
+    min-width: 28px !important;
+    line-height: 28px !important;
+
+    mat-icon {
+        font-size: 16px;
+        width: 16px;
+        height: 16px;
+        line-height: 16px;
+    }
+}
+
+.interval-value {
+    min-width: 32px;
+    text-align: center;
+    font-weight: 500;
+    font-size: 0.875rem;
+    color: var(--text-primary, #333);
+}
+
+// Dark mode support
+:host-context(.dark-theme) {
+    .setting-label,
+    .interval-value {
+        color: var(--text-primary, #fff);
+    }
+
+    .setting-item {
+        border-bottom-color: rgba(255, 255, 255, 0.12);
+    }
+}
