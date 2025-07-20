@@ -50,6 +50,7 @@
     "build": {
         "appId": "com.4gray.ddplan",
         "productName": "DDPlan",
+        "publish": null,
         "directories": {
             "output": "dist/electron"
         },
