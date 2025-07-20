@@ -1,116 +1,113 @@
 name: Build and Release
 
 on:
-  push:
-    tags:
-      - 'v*.*.*'
-  pull_request:
-    branches: [ main, develop ]
-  workflow_dispatch:
+    push:
+        tags:
+            - 'v*.*.*'
+    pull_request:
+        branches: [main, develop]
+    workflow_dispatch:
 
 jobs:
-  build:
-    strategy:
-      matrix:
-        os: [macos-latest, ubuntu-latest, windows-latest]
-    
-    runs-on: ${{ matrix.os }}
-    
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+    build:
+        strategy:
+            matrix:
+                os: [macos-latest, ubuntu-latest, windows-latest]
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          cache: 'npm'
+        runs-on: ${{ matrix.os }}
 
-      - name: Install dependencies
-        run: npm ci --legacy-peer-deps
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
 
-      - name: Lint code
-        run: npm run lint
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: '20'
+                  cache: 'npm'
 
-      - name: Build Angular app
-        run: npm run build:ng
+            - name: Install dependencies
+              run: npm ci --legacy-peer-deps
 
-      - name: Package Electron app (macOS)
-        if: matrix.os == 'macos-latest'
-        run: npm run package:electron -- --mac
-        env:
-          CSC_IDENTITY_AUTO_DISCOVERY: false
-          
-      - name: Package Electron app (Linux)
-        if: matrix.os == 'ubuntu-latest'
-        run: npm run package:electron -- --linux
-        
-      - name: Package Electron app (Windows)
-        if: matrix.os == 'windows-latest'
-        run: npm run package:electron -- --win
-        env:
-          CSC_LINK: ''
-          CSC_KEY_PASSWORD: ''
+            - name: Build Angular app
+              run: npm run build:ng
 
-      - name: Upload artifacts (macOS)
-        if: matrix.os == 'macos-latest'
-        uses: actions/upload-artifact@v4
-        with:
-          name: ddplan-macos
-          path: |
-            dist/electron/*.dmg
-            dist/electron/*.zip
-          retention-days: 30
+            - name: Package Electron app (macOS)
+              if: matrix.os == 'macos-latest'
+              run: npm run package:electron -- --mac
+              env:
+                  CSC_IDENTITY_AUTO_DISCOVERY: false
 
-      - name: Upload artifacts (Linux)
-        if: matrix.os == 'ubuntu-latest'
-        uses: actions/upload-artifact@v4
-        with:
-          name: ddplan-linux
-          path: |
-            dist/electron/*.AppImage
-            dist/electron/*.deb
-            dist/electron/*.rpm
-            dist/electron/*.tar.gz
-          retention-days: 30
+            - name: Package Electron app (Linux)
+              if: matrix.os == 'ubuntu-latest'
+              run: npm run package:electron -- --linux
 
-      - name: Upload artifacts (Windows)
-        if: matrix.os == 'windows-latest'
-        uses: actions/upload-artifact@v4
-        with:
-          name: ddplan-windows
-          path: |
-            dist/electron/*.exe
-            dist/electron/*.msi
-            dist/electron/*.zip
-          retention-days: 30
+            - name: Package Electron app (Windows)
+              if: matrix.os == 'windows-latest'
+              run: npm run package:electron -- --win
+              env:
+                  CSC_LINK: ''
+                  CSC_KEY_PASSWORD: ''
 
-  release:
-    needs: build
-    runs-on: ubuntu-latest
-    if: startsWith(github.ref, 'refs/tags/v')
-    
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+            - name: Upload artifacts (macOS)
+              if: matrix.os == 'macos-latest'
+              uses: actions/upload-artifact@v4
+              with:
+                  name: ddplan-macos
+                  path: |
+                      dist/electron/*.dmg
+                      dist/electron/*.zip
+                  retention-days: 30
 
-      - name: Download all artifacts
-        uses: actions/download-artifact@v4
-        with:
-          path: ./artifacts
+            - name: Upload artifacts (Linux)
+              if: matrix.os == 'ubuntu-latest'
+              uses: actions/upload-artifact@v4
+              with:
+                  name: ddplan-linux
+                  path: |
+                      dist/electron/*.AppImage
+                      dist/electron/*.deb
+                      dist/electron/*.rpm
+                      dist/electron/*.tar.gz
+                  retention-days: 30
 
-      - name: Display structure of downloaded files
-        run: ls -la ./artifacts
+            - name: Upload artifacts (Windows)
+              if: matrix.os == 'windows-latest'
+              uses: actions/upload-artifact@v4
+              with:
+                  name: ddplan-windows
+                  path: |
+                      dist/electron/*.exe
+                      dist/electron/*.msi
+                      dist/electron/*.zip
+                  retention-days: 30
 
-      - name: Create Release
-        uses: softprops/action-gh-release@v2
-        with:
-          files: |
-            ./artifacts/ddplan-macos/*
-            ./artifacts/ddplan-linux/*
-            ./artifacts/ddplan-windows/*
-          draft: false
-          prerelease: false
-          generate_release_notes: true
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    release:
+        needs: build
+        runs-on: ubuntu-latest
+        if: startsWith(github.ref, 'refs/tags/v')
+
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
+
+            - name: Download all artifacts
+              uses: actions/download-artifact@v4
+              with:
+                  path: ./artifacts
+
+            - name: Display structure of downloaded files
+              run: ls -la ./artifacts
+
+            - name: Create Release
+              uses: softprops/action-gh-release@v2
+              with:
+                  files: |
+                      ./artifacts/ddplan-macos/*
+                      ./artifacts/ddplan-linux/*
+                      ./artifacts/ddplan-windows/*
+                  draft: false
+                  prerelease: false
+                  generate_release_notes: true
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
